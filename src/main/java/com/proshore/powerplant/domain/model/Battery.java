@@ -24,7 +24,7 @@ public class Battery extends BaseModel<Long> {
         private final Capacity averageCapacity;
 
         public Statistics(List<Battery> batteries) {
-            if (batteries == null)
+            if (batteries == null || batteries.isEmpty())
                 throw new DataNotFoundException("Data not found");
             this.names = sortedNames(batteries);
             this.totalCapacity = totalCapacity(capacities(batteries));

@@ -18,8 +18,9 @@ class BatteryStatisticsTest {
 
 
     @Test
-    void exceptionIfSuppliedNullBatteries() {
+    void exceptionIfBatteriesAreNotSupplied() {
         assertThrows(DataNotFoundException.class, () -> new Battery.Statistics(null));
+        assertThrows(DataNotFoundException.class, () -> new Battery.Statistics(List.of()));
     }
 
     @Test
@@ -27,10 +28,10 @@ class BatteryStatisticsTest {
         var names = statistics.getNames();
         assertFalse(names.isEmpty());
         assertEquals(4, names.size());
-        assertEquals("A_TEST", names.get(0));
-        assertEquals("B_TEST", names.get(1));
-        assertEquals("C_TEST", names.get(2));
-        assertEquals("D_TEST", names.get(3));
+        assertEquals(new Name("A_TEST"), names.get(0));
+        assertEquals(new Name("B_TEST"), names.get(1));
+        assertEquals(new Name("C_TEST"), names.get(2));
+        assertEquals(new Name("D_TEST"), names.get(3));
     }
 
     @Test

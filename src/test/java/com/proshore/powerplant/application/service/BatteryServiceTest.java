@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,10 +38,13 @@ class BatteryServiceTest {
 
     @Test
     void batteryStatistics() {
-        when(repository.findByRange(any(Range.class))).thenReturn(List.of(
+        Range range = new Range("5000", "10000");
+        when(repository.findByRange(range)).thenReturn(List.of(
                 battery("Midland", "6057", 50500.0),
                 battery("Cannington", "6107", 13500.0)));
-        var response = service.batteryStatistics(new Range("10000", "50000"));
+
+        var response = service.batteryStatistics(range);
+
         assertNotNull(response);
         assertFalse(response.getNames().isEmpty());
         assertEquals(2, response.getNames().size());
@@ -50,7 +52,7 @@ class BatteryServiceTest {
         assertEquals("Midland", response.getNames().get(1));
         assertEquals(64000.0, response.getTotalCapacity());
         assertEquals(32000.0, response.getAverageCapacity());
-        verify(repository).findByRange(new Range("10000", "50000"));
+        verify(repository).findByRange(range);
     }
 
     private static Battery battery(String name, String code, Double capacity) {

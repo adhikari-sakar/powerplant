@@ -24,26 +24,29 @@ This is an application for a virtual power plant system for aggregating distribu
 
 ### Run Instruction
 - mvn clean install
-- `./mvnw spring-boot:run`
+- `./mvnw spring-boot:run` or `mvn spring-boot:run` or `java -jar target/powerplant-0.0.1-SNAPSHOT.jar`
 - Database is automatically loaded with the samples batteries on application start up.
-- Data can be viewed through h2 console http://localhost:8080/h2-console/
 
 ### Database 
+- Data can be viewed/queried through h2 console http://localhost:8080/h2-console/
 - JDBC URL: jdbc:h2:mem:powerplant
 - User: Sa
 
-### PowerPlant Battery API:
+### Power Plant Battery API:
 - A collection of batteries can be registered through **/api/v1/batteries/register** API.
-- Battery consists of **Name**, **Postcode** and **Capacity**.
+- BatteryRequest consists of **name**, **postcode** and **capacity**.
 - Battery information can be collected by supplying the Postcode range through **/api/v1/batteries/info** API.
-- Postcode range consists of **from** and **to** range parameters.
+- Postcode range consists of **from** and **to** request parameters.
 - Battery information will contain the names of registered batteries in alphabetical order along with total and average battery capacity.
-- Request data must not be invalid like null or empty
+- Request data must not be invalid like null or empty.
 - Invalid API requests are handled with proper exception message.
 
 
 ### Postman
 The documentation for all sever endpoints can be found in `/src/main/resources/BatteryAPICollection.json` file.
+- Import the json collection file in Postman client.
+- Invoke Register request for registering new batteries.
+- Invoke Battery Info request for querying batteries within supplied postcode range.
 
 ### Sample Data
 ```json
