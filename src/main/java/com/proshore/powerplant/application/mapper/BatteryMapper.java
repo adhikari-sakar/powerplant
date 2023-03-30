@@ -11,21 +11,21 @@ import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface BatterMapper {
+public interface BatteryMapper {
     @Mapping(target = "name.name", source = "name")
-    @Mapping(target = "postCode.code", source = "postCode")
+    @Mapping(target = "postcode.code", source = "postcode")
     @Mapping(target = "capacity.unit", source = "capacity")
     Battery toModel(BatteryEntity entity);
 
     @Mapping(source = "name.name", target = "name")
-    @Mapping(source = "postCode.code", target = "postCode")
+    @Mapping(source = "postcode.code", target = "postcode")
     @Mapping(source = "capacity.unit", target = "capacity")
     BatteryEntity toEntity(Battery model);
 
     List<BatteryEntity> toEntities(List<Battery> batteries);
 
     @Mapping(target = "name.name", source = "name")
-    @Mapping(target = "postCode.code", source = "postCode")
+    @Mapping(target = "postcode.code", source = "postcode")
     @Mapping(target = "capacity.unit", source = "capacity")
     Battery toModel(BatteryRequest request);
 

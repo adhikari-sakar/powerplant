@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface BatteryJpaRepository extends JpaRepository<BatteryEntity, Long> {
-
-    List<BatteryEntity> findAllByCapacityIsGreaterThanEqualAndCapacityIsLessThanEqual(Integer from , Integer to);
+    List<BatteryEntity> findAllByPostcodeBetween(String from, String to);
 }

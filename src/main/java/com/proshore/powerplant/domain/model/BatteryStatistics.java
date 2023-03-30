@@ -1,5 +1,6 @@
 package com.proshore.powerplant.domain.model;
 
+import com.proshore.powerplant.application.exception.DataNotFoundException;
 import lombok.Getter;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public class BatteryStatistics {
     private final Capacity averageCapacity;
 
     public BatteryStatistics(List<Battery> batteries) {
+        if (batteries == null)
+            throw new DataNotFoundException("Data not found");
         this.names = sortedNames(batteries);
         this.totalCapacity = totalCapacity(capacities(batteries));
         this.averageCapacity = averageCapacity(capacities(batteries));
@@ -22,7 +25,7 @@ public class BatteryStatistics {
         return batteries.stream().map(Battery::getName).map(Name::getName).sorted().collect(toList());
     }
 
-    private static List<Capacity> capacities(List<Battery> batteries) {
+    private List<Capacity> capacities(List<Battery> batteries) {
         return batteries.stream().map(Battery::getCapacity).collect(toList());
     }
 
@@ -31,6 +34,6 @@ public class BatteryStatistics {
     }
 
     private Capacity averageCapacity(List<Capacity> capacities) {
-        return new Capacity(capacities.stream().mapToDouble(Capacity::getUnit).average().orElse(0.0));
+        return new Capacity(capacities.stream().mapToDouble(Capacity::getUnit).average().orElse(0));
     }
 }

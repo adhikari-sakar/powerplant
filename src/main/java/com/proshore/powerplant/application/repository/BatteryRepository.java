@@ -1,6 +1,6 @@
 package com.proshore.powerplant.application.repository;
 
-import com.proshore.powerplant.application.mapper.BatterMapper;
+import com.proshore.powerplant.application.mapper.BatteryMapper;
 import com.proshore.powerplant.domain.contracts.BaseRepository;
 import com.proshore.powerplant.domain.model.Battery;
 import com.proshore.powerplant.domain.model.Range;
@@ -16,12 +16,12 @@ import static java.util.stream.Collectors.toList;
 public class BatteryRepository implements BaseRepository<Battery> {
 
     private final BatteryJpaRepository jpaRepository;
-    private final BatterMapper mapper;
+    private final BatteryMapper mapper;
 
     @Override
     public List<Battery> findByRange(Range range) {
         return jpaRepository
-                .findAllByCapacityIsGreaterThanEqualAndCapacityIsLessThanEqual(range.getFrom(), range.getTo())
+                .findAllByPostcodeBetween(range.getFrom(), range.getTo())
                 .stream()
                 .map(mapper::toModel)
                 .collect(toList());

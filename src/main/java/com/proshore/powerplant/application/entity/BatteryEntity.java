@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity(name = "DRONE")
+@Entity(name = "BATTERY")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,7 +18,7 @@ public class BatteryEntity extends BaseEntity {
     @Column(nullable = false, updatable = false)
     private String name;
     @Column(nullable = false, updatable = false)
-    private String postCode;
+    private String postcode;
     @Column(nullable = false, updatable = false)
     private Integer capacity;
 }

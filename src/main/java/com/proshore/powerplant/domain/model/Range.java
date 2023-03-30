@@ -6,6 +6,6 @@ import lombok.Value;
 @Value
 @Getter
 public class Range {
-    Integer from;
-    Integer to;
+    String from;
+    String to;
 }
