@@ -3,6 +3,7 @@ package com.proshore.powerplant.application.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proshore.powerplant.application.dto.BatteryRequest;
+import com.proshore.powerplant.application.dto.Range;
 import com.proshore.powerplant.application.mapper.BatteryMapper;
 import com.proshore.powerplant.application.service.BatteryService;
 import lombok.SneakyThrows;
@@ -44,7 +45,7 @@ class BatteryControllerTest {
 
     @Test
     @SneakyThrows
-    void register_failed_invalid_request() {
+    void register_badRequest() {
         RequestBuilder builder = MockMvcRequestBuilders
                 .post("/api/v1/batteries/register")
                 .contentType(APPLICATION_JSON)
@@ -59,7 +60,9 @@ class BatteryControllerTest {
     @SneakyThrows
     void statistics_success() {
         RequestBuilder builder = MockMvcRequestBuilders
-                .get("/api/v1/batteries/info/100/200");
+                .get("/api/v1/batteries/info")
+                .contentType(APPLICATION_JSON)
+                .content(jsonString(new Range("100", "200")));
 
         mockMvc.perform(builder)
                 .andDo(print())
@@ -68,13 +71,15 @@ class BatteryControllerTest {
 
     @Test
     @SneakyThrows
-    void statistics_notfound() {
+    void statistics_badRequest() {
         RequestBuilder builder = MockMvcRequestBuilders
-                .get("/api/v1/batteries/info/100");
+                .get("/api/v1/batteries/info")
+                .contentType(APPLICATION_JSON)
+                .content(jsonString(new Range()));
 
         mockMvc.perform(builder)
                 .andDo(print())
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
 
     private String jsonString(Object o) throws JsonProcessingException {

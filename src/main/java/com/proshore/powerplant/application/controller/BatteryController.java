@@ -2,6 +2,7 @@ package com.proshore.powerplant.application.controller;
 
 import com.proshore.powerplant.application.dto.BatteryRequest;
 import com.proshore.powerplant.application.dto.BatteryResponse;
+import com.proshore.powerplant.application.dto.Range;
 import com.proshore.powerplant.application.service.BatteryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -33,10 +33,9 @@ public class BatteryController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "/info/{from}/{to}", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/info", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
-    public ResponseEntity<BatteryResponse> statistics(@NotNull @NotEmpty @PathVariable("from") String from,
-                                                      @NotNull @NotEmpty @PathVariable("to") String to) {
-        return ResponseEntity.ok(service.batteryStatistics(from, to));
+    public ResponseEntity<BatteryResponse> statistics(@RequestBody @Valid @NotNull Range range) {
+        return ResponseEntity.ok(service.batteryStatistics(range));
     }
 }

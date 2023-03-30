@@ -1,9 +1,13 @@
 package com.proshore.powerplant.application.service;
 
+import com.proshore.powerplant.application.dto.Range;
 import com.proshore.powerplant.application.mapper.BatteryMapper;
 import com.proshore.powerplant.application.mapper.BatteryMapperImpl;
 import com.proshore.powerplant.application.repository.BatteryRepository;
-import com.proshore.powerplant.domain.model.*;
+import com.proshore.powerplant.domain.model.Battery;
+import com.proshore.powerplant.domain.model.Capacity;
+import com.proshore.powerplant.domain.model.Code;
+import com.proshore.powerplant.domain.model.Name;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -42,7 +46,7 @@ class BatteryServiceTest {
 
     @Test
     void batteryStatistics() {
-        var response = service.batteryStatistics("10000", "50000");
+        var response = service.batteryStatistics(new Range("10000", "50000"));
         assertNotNull(response);
         assertFalse(response.getNames().isEmpty());
         assertEquals(2, response.getNames().size());

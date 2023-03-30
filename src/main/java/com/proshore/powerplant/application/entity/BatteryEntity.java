@@ -18,7 +18,7 @@ public class BatteryEntity extends BaseEntity {
     @Column(nullable = false, updatable = false)
     private String name;
     @Column(nullable = false, updatable = false)
-    private String postcode;
+    private Integer postcode;
     @Column(nullable = false, updatable = false)
     private Integer capacity;
 }

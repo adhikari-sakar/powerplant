@@ -1,6 +1,6 @@
 package com.proshore.powerplant.domain.contracts;
 
-import com.proshore.powerplant.domain.model.Range;
+import com.proshore.powerplant.application.dto.Range;
 
 import java.util.List;
 

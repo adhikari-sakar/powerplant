@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface BatteryJpaRepository extends JpaRepository<BatteryEntity, Long> {
-    List<BatteryEntity> findAllByPostcodeBetween(String from, String to);
+    List<BatteryEntity> findAllByPostcodeBetween(Integer from, Integer to);
 }

@@ -1,5 +1,6 @@
 package com.proshore.powerplant.application.repository;
 
+import com.proshore.powerplant.application.dto.Range;
 import com.proshore.powerplant.application.entity.BatteryEntity;
 import com.proshore.powerplant.application.mapper.BatteryMapper;
 import com.proshore.powerplant.domain.model.*;
@@ -33,11 +34,11 @@ class BatteryRepositoryTest {
 
     @Test
     void findByRange() {
-        when(jpaRepository.findAllByPostcodeBetween("100", "200")).thenReturn(List.of(new BatteryEntity()));
+        when(jpaRepository.findAllByPostcodeBetween(100, 200)).thenReturn(List.of(new BatteryEntity()));
         List<Battery> batteries = repository.findByRange(new Range("100", "200"));
         assertFalse(batteries.isEmpty());
         assertEquals(1, batteries.size());
-        verify(jpaRepository).findAllByPostcodeBetween("100", "200");
+        verify(jpaRepository).findAllByPostcodeBetween(100, 200);
         verify(mapper).toModel(any(BatteryEntity.class));
     }
 

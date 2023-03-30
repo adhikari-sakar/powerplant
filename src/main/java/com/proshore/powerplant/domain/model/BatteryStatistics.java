@@ -34,6 +34,6 @@ public class BatteryStatistics {
     }
 
     private Capacity averageCapacity(List<Capacity> capacities) {
-        return new Capacity(capacities.stream().mapToDouble(Capacity::getUnit).average().orElse(0));
+        return new Capacity(capacities.stream().mapToDouble(Capacity::getUnit).average().orElse(0.0)).format();
     }
 }
