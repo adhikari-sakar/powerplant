@@ -1,7 +1,6 @@
 package com.proshore.powerplant.application.service;
 
 import com.proshore.powerplant.application.dto.Range;
-import com.proshore.powerplant.application.mapper.BatteryMapper;
 import com.proshore.powerplant.application.mapper.BatteryMapperImpl;
 import com.proshore.powerplant.application.repository.BatteryRepository;
 import com.proshore.powerplant.domain.model.Battery;
@@ -24,18 +23,12 @@ import static org.mockito.MockitoAnnotations.openMocks;
 class BatteryServiceTest {
     @Mock
     private BatteryRepository repository;
-    private final BatteryMapper mapper = new BatteryMapperImpl();
     private BatteryService service;
 
     @BeforeEach
     void setUp() {
         openMocks(this);
-        service = new BatteryService(repository, mapper);
-        when(repository.findByRange(any(Range.class))).thenReturn(List.of(
-                battery("Midland", "6057", 50500.0),
-                battery("Cannington", "6107", 13500.0))
-
-        );
+        service = new BatteryService(repository, new BatteryMapperImpl());
     }
 
     @Test
@@ -46,6 +39,9 @@ class BatteryServiceTest {
 
     @Test
     void batteryStatistics() {
+        when(repository.findByRange(any(Range.class))).thenReturn(List.of(
+                battery("Midland", "6057", 50500.0),
+                battery("Cannington", "6107", 13500.0)));
         var response = service.batteryStatistics(new Range("10000", "50000"));
         assertNotNull(response);
         assertFalse(response.getNames().isEmpty());

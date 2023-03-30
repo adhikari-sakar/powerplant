@@ -47,7 +47,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"from\": \"6000\",\n    \"to\": \"10000\"\n}",
+					"raw": "{\n    \"from\": \"\",\n    \"to\": \"10000\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

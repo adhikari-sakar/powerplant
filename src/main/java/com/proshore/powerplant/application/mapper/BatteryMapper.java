@@ -4,11 +4,13 @@ import com.proshore.powerplant.application.dto.BatteryRequest;
 import com.proshore.powerplant.application.dto.BatteryResponse;
 import com.proshore.powerplant.application.entity.BatteryEntity;
 import com.proshore.powerplant.domain.model.Battery;
-import com.proshore.powerplant.domain.model.BatteryStatistics;
+import com.proshore.powerplant.domain.model.Name;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Mapper(componentModel = "spring")
 public interface BatteryMapper {
@@ -31,7 +33,12 @@ public interface BatteryMapper {
 
     List<Battery> toModels(List<BatteryRequest> requests);
 
+    @Mapping(source = "names", target = "names")
     @Mapping(source = "totalCapacity.unit", target = "totalCapacity")
     @Mapping(source = "averageCapacity.unit", target = "averageCapacity")
-    BatteryResponse toResponse(BatteryStatistics stat);
+    BatteryResponse toResponse(Battery.Statistics stat);
+
+    default List<String> toNames(List<Name> names) {
+        return names.stream().map(Name::getName).collect(toList());
+    }
 }

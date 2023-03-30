@@ -5,7 +5,7 @@ import com.proshore.powerplant.application.dto.BatteryResponse;
 import com.proshore.powerplant.application.dto.Range;
 import com.proshore.powerplant.application.mapper.BatteryMapper;
 import com.proshore.powerplant.application.repository.BatteryRepository;
-import com.proshore.powerplant.domain.model.BatteryStatistics;
+import com.proshore.powerplant.domain.model.Battery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +23,6 @@ public class BatteryService {
     }
 
     public BatteryResponse batteryStatistics(Range range) {
-        return mapper.toResponse(new BatteryStatistics(repository.findByRange(range)));
+        return mapper.toResponse(new Battery.Statistics(repository.findByRange(range)));
     }
 }

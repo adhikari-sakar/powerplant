@@ -3,7 +3,6 @@ package com.proshore.powerplant.application.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proshore.powerplant.application.dto.BatteryRequest;
-import com.proshore.powerplant.application.dto.Range;
 import com.proshore.powerplant.application.mapper.BatteryMapper;
 import com.proshore.powerplant.application.service.BatteryService;
 import lombok.SneakyThrows;
@@ -18,7 +17,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(BatteryController.class)
@@ -39,8 +37,7 @@ class BatteryControllerTest {
                 .content(jsonString(List.of(batteryRequest())));
 
         mockMvc.perform(builder)
-                .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -52,7 +49,6 @@ class BatteryControllerTest {
                 .content(jsonString(List.of(new BatteryRequest())));
 
         mockMvc.perform(builder)
-                .andDo(print())
                 .andExpect(status().isBadRequest());
     }
 
@@ -61,11 +57,10 @@ class BatteryControllerTest {
     void statistics_success() {
         RequestBuilder builder = MockMvcRequestBuilders
                 .get("/api/v1/batteries/info")
-                .contentType(APPLICATION_JSON)
-                .content(jsonString(new Range("100", "200")));
+                .param("from", "100")
+                .param("to", "200");
 
         mockMvc.perform(builder)
-                .andDo(print())
                 .andExpect(status().isOk());
     }
 
@@ -74,11 +69,10 @@ class BatteryControllerTest {
     void statistics_badRequest() {
         RequestBuilder builder = MockMvcRequestBuilders
                 .get("/api/v1/batteries/info")
-                .contentType(APPLICATION_JSON)
-                .content(jsonString(new Range()));
+                .param("from", "")
+                .param("to", "");
 
         mockMvc.perform(builder)
-                .andDo(print())
                 .andExpect(status().isBadRequest());
     }
 

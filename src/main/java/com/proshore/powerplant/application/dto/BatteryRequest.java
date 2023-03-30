@@ -8,11 +8,13 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class BatteryRequest {
-    @NotEmpty
+    @NotNull(message = "Battery name should not be null")
+    @NotEmpty(message = "Battery name should not be empty")
     private String name;
-    @NotEmpty
+    @NotNull(message = "Battery postcode should not be null")
+    @NotEmpty(message = "Battery postcode should not be empty")
     private String postcode;
-    @NotNull
-    @Min(1)
+    @NotNull(message = "Battery capacity should not be null")
+    @Min(value = 1, message = "Capacity value should be greater than zero")
     private Integer capacity;
 }

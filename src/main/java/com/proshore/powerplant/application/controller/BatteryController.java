@@ -11,11 +11,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -27,15 +27,14 @@ public class BatteryController {
     private final BatteryService service;
 
     @PostMapping(value = "/register", consumes = APPLICATION_JSON_VALUE)
-    @ResponseStatus(CREATED)
     public ResponseEntity<HttpStatus> register(@RequestBody @Valid @NotNull List<BatteryRequest> requests) {
         service.registerBatteries(requests);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(CREATED);
     }
 
     @GetMapping(value = "/info", produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(OK)
-    public ResponseEntity<BatteryResponse> statistics(@RequestBody @Valid @NotNull Range range) {
-        return ResponseEntity.ok(service.batteryStatistics(range));
+    public ResponseEntity<BatteryResponse> range(@NotNull @NotEmpty @RequestParam("from") String from,
+                                                 @NotNull @NotEmpty @RequestParam("to") String to) {
+        return ResponseEntity.ok(service.batteryStatistics(new Range(from, to)));
     }
 }

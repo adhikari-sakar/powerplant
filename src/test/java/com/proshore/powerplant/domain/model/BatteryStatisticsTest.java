@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BatteryStatisticsTest {
 
-    private final BatteryStatistics statistics = new BatteryStatistics(List.of(
+    private final Battery.Statistics statistics = new Battery.Statistics(List.of(
             battery(new Name("D_TEST"), new Code("1000"), new Capacity(4000.0)),
             battery(new Name("A_TEST"), new Code("1000"), new Capacity(1000.0)),
             battery(new Name("C_TEST"), new Code("1000"), new Capacity(3000.0)),
@@ -19,7 +19,7 @@ class BatteryStatisticsTest {
 
     @Test
     void exceptionIfSuppliedNullBatteries() {
-        assertThrows(DataNotFoundException.class, () -> new BatteryStatistics(null));
+        assertThrows(DataNotFoundException.class, () -> new Battery.Statistics(null));
     }
 
     @Test
