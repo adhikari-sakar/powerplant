@@ -26,8 +26,8 @@ public class BatteryLoader {
         TypeReference<List<BatteryRequest>> typeReference = new TypeReference<>() {};
         InputStream inputStream = getClass().getResourceAsStream("/data.json");
         try {
-            List<BatteryRequest> users = mapper.readValue(inputStream, typeReference);
-            repository.saveAll(batteryMapper.toModels(users));
+            List<BatteryRequest> requests = mapper.readValue(inputStream, typeReference);
+            repository.saveAll(batteryMapper.toModels(requests));
         } catch (Exception e) {
             throw new InvalidDataException("Failed to read data");
         }
