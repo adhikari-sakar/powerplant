@@ -1,5 +1,6 @@
 package com.proshore.powerplant.domain.model;
 
+import com.proshore.powerplant.application.exception.InvalidDataException;
 import lombok.Getter;
 import lombok.Value;
 
@@ -15,6 +16,8 @@ public class Capacity {
     Double unit;
 
     public Capacity format() {
+        if (unit == null || unit.isNaN())
+            throw new InvalidDataException("Invalid Capacity");
         return new Capacity(parseDouble(formatter.format(unit)));
     }
 }

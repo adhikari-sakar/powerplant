@@ -55,8 +55,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handle(ConstraintViolationException e) {
         Map<String, Object> response = new HashMap<>();
         Map<String, String> errors = new HashMap<>();
-        Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
-        for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+        Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+        for (ConstraintViolation<?> constraintViolation : violations) {
             errors.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
         }
         response.put("error", errors);

@@ -5,6 +5,7 @@ import com.proshore.powerplant.application.dto.BatteryResponse;
 import com.proshore.powerplant.application.dto.Range;
 import com.proshore.powerplant.application.mapper.BatteryMapper;
 import com.proshore.powerplant.application.repository.BatteryRepository;
+import com.proshore.powerplant.domain.contracts.BaseRepository;
 import com.proshore.powerplant.domain.model.Battery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BatteryService {
 
-    private final BatteryRepository repository;
+    private final BaseRepository<Battery> repository;
     private final BatteryMapper mapper;
 
     public void registerBatteries(List<BatteryRequest> requests) {
