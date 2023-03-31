@@ -16,9 +16,12 @@ This is an application for a virtual power plant system for aggregating distribu
 
 ### Properties:
 
-| property                       | sample value | description                                     |
-|--------------------------------|:------------:|-------------------------------------------------|
-| `server.port`                  |     8080     | server http port                                |
+| property                      |      sample value      | description      |
+|-------------------------------|:----------------------:|------------------|
+| `server.port`                 |          8080          | server http port |
+| `spring.datasource.url`       | jdbc:h2:mem:powerplant | db url           |
+| `spring.datasource.username=` |           sa           | db user name     |
+| `spring.datasource.password=` |                      | db password      |
 
 
 
@@ -26,11 +29,7 @@ This is an application for a virtual power plant system for aggregating distribu
 - mvn clean install
 - `./mvnw spring-boot:run` or `mvn spring-boot:run` or `java -jar target/powerplant-0.0.1-SNAPSHOT.jar`
 - Database is automatically loaded with the samples batteries on application start up.
-
-### Database 
 - Data can be viewed/queried through h2 console http://localhost:8080/h2-console/
-- JDBC URL: jdbc:h2:mem:powerplant
-- User: Sa
 
 ### Power Plant Battery API:
 - A collection of batteries can be registered through **/api/v1/batteries/register** API.
