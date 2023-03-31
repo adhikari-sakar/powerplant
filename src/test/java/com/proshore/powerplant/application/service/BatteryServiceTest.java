@@ -8,7 +8,6 @@ import com.proshore.powerplant.domain.model.Battery;
 import com.proshore.powerplant.domain.model.Capacity;
 import com.proshore.powerplant.domain.model.Code;
 import com.proshore.powerplant.domain.model.Name;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,12 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BatteryServiceTest {
 
     private final TestBatteryRepository testRepository = new TestBatteryRepository();
-    private BatteryService service;
-
-    @BeforeEach
-    void init() {
-        service = new BatteryService(testRepository, new BatteryMapperImpl());
-    }
+    private final BatteryService service = new BatteryService(testRepository, new BatteryMapperImpl());
 
     @Test
     void registerBatteries() {
