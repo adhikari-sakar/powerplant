@@ -16,12 +16,12 @@ This is an application for a virtual power plant system for aggregating distribu
 
 ### Properties:
 
-| property                      |      sample value      | description      |
-|-------------------------------|:----------------------:|------------------|
-| `server.port`                 |          8080          | server http port |
-| `spring.datasource.url`       | jdbc:h2:mem:powerplant | db url           |
-| `spring.datasource.username=` |           sa           | db user name     |
-| `spring.datasource.password=` |                      | db password      |
+| property                     |      sample value      | description      |
+|------------------------------|:----------------------:|------------------|
+| `server.port`                |          8080          | server http port |
+| `spring.datasource.url`      | jdbc:h2:mem:powerplant | db url           |
+| `spring.datasource.username` |           sa           | db user name     |
+| `spring.datasource.password` |                      | db password      |
 
 
 
