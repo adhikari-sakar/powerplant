@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 
 public class TestBatteryRepository implements BaseRepository<Battery> {
 
-    List<Battery> batteries = new ArrayList<>();
+    private final List<Battery> batteries = new ArrayList<>();
 
     @Override
     public List<Battery> findByRange(Range range) {

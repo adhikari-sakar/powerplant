@@ -17,7 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BatteryServiceTest {
-    TestBatteryRepository testRepository = new TestBatteryRepository();
+
+    private final TestBatteryRepository testRepository = new TestBatteryRepository();
     private BatteryService service;
 
     @BeforeEach
