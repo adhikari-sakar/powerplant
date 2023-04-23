@@ -35,8 +35,14 @@ public class BaseEntity implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BaseEntity)) return false;
-        BaseEntity that = (BaseEntity) o;
-        return id.equals(that.id) && createdAt.equals(that.createdAt) && updatedAt.equals(that.updatedAt);
+        if (!(o instanceof BaseEntity))
+            return false;
+        BaseEntity other = (BaseEntity) o;
+        return id != null && id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
